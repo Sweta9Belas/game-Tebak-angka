@@ -3,22 +3,19 @@ function angkaAcak() {
   return angkaKom;
 }
 
-function validasi(angkaSatu, angkaDua) {
-  if (angkaSatu == null || angkaSatu == "" || angkaSatu >= 4 || angkaSatu == 0) {
-    return true;
+function validasi(angka) {
+  if (angka == null || angka == "" || angka >= 4 || angka == 0) {
+    return false;
   }
 
-  if (angkaDua == null || angkaDua == "" || angkaDua >= 4 || angkaDua == 0) {
-    return true;
-  }
+  return true;
 }
 
-function check_tebakan(angkaSatu, angkaDua, angkaAcak) {
-  if (angkaSatu == angkaAcak) {
-    return (skorSatu += 1);
-  } else if (angkaDua == angkaAcak) {
-    return (skorDua += 1);
+function check_tebakan(angka, angkaAcak) {
+  if (angka === angkaAcak) {
+    return true;
   }
+  return false;
 }
 
 function main() {
@@ -26,14 +23,26 @@ function main() {
   let skorSatu = 0;
   let skorDua = 0;
 
-  let angkaSatu = prompt("Masukkan angka yang anda pilih;");
-  let angkaDua = prompt("Masukkan angka yang ada pilih;");
-  validasi(angkaSatu, angkaDua);
-  angkaAcak();
-  check_tebakan();
+  for (let i = 0; i < 3; i++) {
+    let angkaSatu = Number(prompt("Masukkan angka yang anda pilih;"));
+    let angkaDua = Number(prompt("Masukkan angka yang ada pilih;"));
+    let acak = angkaAcak();
+    angkaAcak();
+    if (validasi(angkaSatu)) {
+      if (check_tebakan(angkaSatu, acak)) {
+        skorSatu += 1;
+      }
+    }
 
-  alert("Pemain satu skor anda adalah " + skorSatu);
-  alert("Pemain dua skor anda adalah " + skorDua);
+    if (validasi(angkaDua)) {
+      if (check_tebakan(angkaDua, acak)) {
+        skorDua += 1;
+      }
+    }
+    alert("angka komputer adalah" + acak);
+    alert("Pemain satu skor anda adalah " + skorSatu);
+    alert("Pemain dua skor anda adalah " + skorDua);
+  }
 }
 
 main();
